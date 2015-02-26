@@ -1,0 +1,62 @@
+.dn{
+    display: none;}
+
+.abso{ position: absolute;}
+.fl{float:left}.fr{float:right}.cl{zoom:1}.cl:after{content:"";display:block;height:0;clear:both;visibility:hidden}
+.pointer{cursor: pointer;}
+.title-head *{
+    cursor: pointer;}
+.wrapper{
+    width: 270px;
+    height: 184px;
+    position: relative;
+margin:auto; overflow: hidden;}
+
+.wrapper .jump{
+    display: block;
+    text-decoration: none;
+}
+
+.player_btn{
+    width: 64px;
+    height: 64px;
+top: 50%; left: 50%; margin: -32px 0 0 -32px;}
+
+a.jump .player_btn{
+    background: url(../images/player_min_btn.png) no-repeat left top;}
+
+.p720{
+    width: 39px;
+    height: 39px;left: 0; top: 0;background: url(../images/720.png) no-repeat left top;}
+
+.title-head{width:100%;left: 0; bottom:0; height: 68px; background: url("../images/titlebar.png") no-repeat;}
+.title-bar{ width:258px; padding:6px;  color: #fff; font-size: 12px;
+    height: 52px;
+/*
+    filter:alpha(opacity=100 finishopacity=50 style=1 startx=0,starty=0,finishx=0,finishy=150) progid:DXImageTransform.Microsoft.gradient(startcolorstr=red,endcolorstr=blue,gradientType=0);
+    -ms-filter:alpha(opacity=100 finishopacity=50 style=1 startx=0,starty=0,finishx=0,finishy=150) progid:DXImageTransform.Microsoft.gradient(startcolorstr=red,endcolorstr=blue,gradientType=0);
+
+    background:-moz-linear-gradient(bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0));
+    background:-webkit-gradient(linear, 0 0, 0 bottom, from(rgba(0, 0, 0, 0)), to(rgba(0, 0, 0, 0.6)));*/
+
+}
+.title-bar h3{font-size: 16px; font-family: "微软雅黑";}
+.title-bar h3 em{font-size: 12px;font-family: "宋体"; margin:0 7px 0 5px; font-style: normal;}
+.title-bar .des{font-size: 13px; color: #c0c0c0; margin:3px auto;}
+.video-view{ background: url(../images/play_count.png) no-repeat left center; padding-left: 15px;
+    margin-top: 3px;}
+.add-favorite{ display: inline-block; position: relative;top:3px; *top:-1px; _top: -2px; width:12px; height: 12px; background: url(../images/jia.png) no-repeat left bottom;}
+
+.change-tips{bottom: 10px;right: 10px; }
+
+.change-tips li{
+    float: left;
+    margin-left: 5px;
+}
+.change-tips li, .change-tips li a{display: block;width: 10px;
+    height: 4px; overflow: hidden; text-indent: -9999em;}
+
+.change-tips li a:hover, .change-tips li a.active{
+    background-image: url("../images/slider_btn_on.png");}
+
+.change-tips li a{background: url("../images/slider_btn.png") no-repeat;}

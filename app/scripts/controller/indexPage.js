@@ -1,4 +1,4 @@
-define(['jquery'], function($){
+define(['jquery', 'component/jquery.slider'], function($){
        return function(){
 
             var sliderContainer = $('#slider-container'),
@@ -29,6 +29,28 @@ define(['jquery'], function($){
            });
 
 
+           // 图片轮播
 
+           $('#tips-box').slider({
+               wrap: sliderContainer,
+               diyTag: '.slider-item',
+               buttons: '#change-tips',
+               buttonTag: 'li',
+               eachMove: function(slider){
+                   if( window.DD_belatedPNG){
+                       DD_belatedPNG.fixPng( slider.find('.video-view')[0] );
+
+                   }
+
+               },
+               type: 'fade',
+               width: 270,
+               timer: 5000,
+               speed: 'slow',
+               effect: 'easeInCubic',
+               eventType: 'mouseover',
+               className: 'active',
+               autoplay: true
+            });
        };
 });

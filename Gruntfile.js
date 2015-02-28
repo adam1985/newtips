@@ -22,31 +22,22 @@ module.exports = function (grunt) {
         yeoman: {
             // Configurable paths
             app: 'app',
-            statics: 'public/assets',
-            dist: 'public/dist'
+            dist: 'dist',
+            tmp: '.tmp'
         },
 
         clean: {
             dist: '<%= yeoman.dist %>',
-            views: '<%= yeoman.app %>/online_views'
+            tmp: '<%= yeoman.tmp %>'
         },
-
 
         // 压缩css任务
         cssmin: {
             css: {
                 files: {
-                    '<%= yeoman.dist %>/styles/index.min.css' : [
-                        '<%= yeoman.statics %>/styles/bootstrap.min.css',
-                        '<%= yeoman.statics %>/styles/font-awesome.min.css',
-                        '<%= yeoman.statics %>/styles/animate.css',
-                        '<%= yeoman.statics %>/styles/simple-line-icons.css',
-                        '<%= yeoman.statics %>/styles/font.css',
-                        '<%= yeoman.statics %>/styles/app.css',
-                        '<%= yeoman.statics %>/styles/chosen.css',
-                        '<%= yeoman.statics %>/styles/bootstrap-datetimepicker.min.css',
-                        '<%= yeoman.statics %>/styles/login.css',
-                        '<%= yeoman.statics %>/styles/style.css'
+                    '<%= yeoman.dist %>/styles/layout.css' : [
+                        '<%= yeoman.app %>/styles/reset.css',
+                        '<%= yeoman.app %>/styles/layout.css'
                     ]
                 }
             }
@@ -56,22 +47,40 @@ module.exports = function (grunt) {
         // The following *-min tasks produce minified files in the dist folder
         imagemin: {
             dist: {
-                files: [{
-                    expand: true,
-                    cwd: '<%= yeoman.statics %>/images/',
-                    src: '{,*/}*.{gif,jpeg,jpg,png}',
-                    dest: '<%= yeoman.dist %>/images'
-                }]
+                files: [
+                    {
+                        expand: true,
+                        cwd: '<%= yeoman.app %>/images/',
+                        src: '{,*/}*.{gif,jpeg,jpg,png}',
+                        dest: '<%= yeoman.dist %>/images/'
+                    },
+                    {
+                        expand: true,
+                        cwd: '<%= yeoman.app %>/img/',
+                        src: '{,*/}*.{gif,jpeg,jpg,png}',
+                        dest: '<%= yeoman.dist %>/img/'
+                    }
+                ]
             }
         },
 
-        ejsmin: {
+        htmlmin: {
             dist: {
+                options: {
+                    collapseBooleanAttributes: true,
+                    collapseWhitespace: true,
+                    removeAttributeQuotes: true,
+                    removeCommentsFromCDATA: true,
+                    removeEmptyAttributes: true,
+                    removeOptionalTags: true,
+                    removeRedundantAttributes: true,
+                    useShortDoctype: true
+                },
                 files: [{
                     expand: true,
-                    cwd: '<%= yeoman.app %>/online_views/',
+                    cwd: '<%= yeoman.dist %>',
                     src: '{,*/}*.html',
-                    dest: '<%= yeoman.app %>/online_views/'
+                    dest: '<%= yeoman.dist %>'
                 }]
             }
         },
@@ -79,30 +88,24 @@ module.exports = function (grunt) {
         requirejs: {
             compile: {
                 options: {
-                    "baseUrl": "<%= yeoman.statics %>/scripts",
+                    "baseUrl": "<%= yeoman.app %>/scripts",
                     "paths": {
-                        "jquery": "jquery/jquery",
-                        "validform" : "component/Validform_v5.3.2",
-                        "pageinator" : "component/bootstrap-paginator"
-
-                    },
-                    "shim": {
-                        "validform" : ["jquery"]
+                        "jquery": "jquery/jquery"
                     },
                     "removeCombined": true,
                     "preserveLicenseComments": false,
                     "cssImportIgnore": null,
                     "optimizeCss": "standard",
                     "name": "index",
-                    "out": "<%= yeoman.dist %>/scripts/index.min.js"
+                    "out": "<%= yeoman.dist %>/scripts/index.js"
                 }
             }
         },
 
         concat: {
             requirejs: {
-                src: ['<%= yeoman.statics %>/require.min.js', '<%= yeoman.dist %>/scripts/index.min.js'],
-                dest: '<%= yeoman.dist %>/scripts/index.min.js'
+                src: ['<%= yeoman.app %>/scripts/require.min.js', '<%= yeoman.dist %>/scripts/index.js'],
+                dest: '<%= yeoman.dist %>/scripts/index.js'
             }
         },
 
@@ -112,21 +115,33 @@ module.exports = function (grunt) {
                 files: [{
                     expand: true,
                     dot: true,
-                    cwd: '<%= yeoman.statics %>',
+                    cwd: '<%= yeoman.app %>',
                     dest: '<%= yeoman.dist %>',
                     src: [
-                        'fonts/{,*/}*.*',
-                        'vendor/*.js'
+                        'vendor/DD_belatedPNG_0.0.8a-min.js'
                     ]
                 }]
             },
             html: {
                 files: [{
                     expand: true,
-                    cwd: '<%= yeoman.app %>/views',
-                    dest: '<%= yeoman.app %>/online_views',
+                    cwd: '<%= yeoman.app %>',
+                    dest: '<%= yeoman.dist %>',
                     src: [
                         '{,*/}*.html'
+                    ]
+                }]
+            },
+            tmp: {
+                files: [{
+                    expand: true,
+                    cwd: '<%= yeoman.dist %>',
+                    dest: '<%= yeoman.tmp %>/assets',
+                    src: [
+                        'images/*.*',
+                        'img/*.*',
+                        'styles/*.*',
+                        'scripts/*.*'
                     ]
                 }]
             }
@@ -152,7 +167,7 @@ module.exports = function (grunt) {
             options: {
                 dest: '<%= yeoman.dist %>'
             },
-            html: '<%= yeoman.app %>/online_views/{,*/}*.html'
+            html: '<%= yeoman.app %>/{,*/}*.html'
         },
 
         // Performs rewrites based on rev and the useminPrepare configuration
@@ -161,10 +176,11 @@ module.exports = function (grunt) {
                 assetsDirs: [
                     '<%= yeoman.dist %>',
                     '<%= yeoman.dist %>/images',
+                    '<%= yeoman.dist %>/img',
                     '<%= yeoman.dist %>/styles'
                 ]
             },
-            html: ['<%= yeoman.app %>/online_views/{,*/}*.html'],
+            html: ['<%= yeoman.dist %>/{,*/}*.html'],
             css: ['<%= yeoman.dist %>/styles/{,*/}*.css']
         }
 
@@ -173,14 +189,14 @@ module.exports = function (grunt) {
     grunt.registerTask('default', [
         'clean',
         'useminPrepare',
-        'copy',
-        'concat',
         'cssmin',
         'requirejs',
         'concat',
         'imagemin',
+        'copy',
         'rev',
         'usemin',
-        'ejsmin'
+        'htmlmin',
+        'clean:tmp'
     ]);
 };

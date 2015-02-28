@@ -17,6 +17,10 @@ margin:auto; overflow: hidden;}
     text-decoration: none;
 }
 
+.slider-item{ display: none;}
+.slider-container .active{
+    display: block;}
+
 .player-hander{
     width: 48px;
     height: 48px;
@@ -55,16 +59,18 @@ top: 50%; left: 50%; margin: -24px 0 0 -24px; overflow: hidden;}
     margin-top: 2px;}
 .add-favorite{ display: inline-block; position: relative;top:3px; *top:-1px; _top: -2px; width:12px; height: 12px; background: url(../images/jia.png) no-repeat left bottom;}
 
-.change-tips{bottom: 10px;right: 10px; }
+.change-tips{bottom: 3px;right: 10px; }
 
 .change-tips li{
     float: left;
     margin-left: 5px;
 }
 .change-tips li, .change-tips li a{display: block;width: 10px;
-    height: 4px; overflow: hidden; text-indent: -9999em;}
+    height: 20px; overflow: hidden; text-indent: -9999em;}
 
-.change-tips li a:hover, .change-tips li a.active{
+
+
+.change-tips li a{background: url("../images/slider_btn.png") no-repeat left center;}
+
+.change-tips li a:hover, .change-tips li.active a{
     background-image: url("../images/slider_btn_on.png");}
-
-.change-tips li a{background: url("../images/slider_btn.png") no-repeat;}

@@ -1,8 +1,7 @@
 require.config({
-    "baseUrl": 'assets/scripts',
+    "baseUrl": 'scripts',
     "paths": {
         "jquery": "jquery/jquery"
-
     },
     "shim": {
         "validform" : ["jquery"]

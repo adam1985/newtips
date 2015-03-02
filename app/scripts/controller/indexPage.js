@@ -3,13 +3,13 @@ define(['jquery', 'component/jquery.slider'], function($){
 
             var sliderContainer = $('#slider-container'),
                 titleHead = $('.title-head');
-           titleHead.hover(function(){
+           /*titleHead.hover(function(){
                 var $this = $(this);
                 $this.addClass('title-active');
             }, function(){
                 var $this = $(this);
                 $this.removeClass('title-active');
-            });
+            });*/
 
            $('.player-hander').hover(function(){
                $(this).find('.player_btn_on').removeClass('dn');

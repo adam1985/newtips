@@ -1,6 +1,7 @@
-define(['jquery', './indexPage'],
-    function($, indexPage){
+define(['jquery', './indexPage',  './interfacePage'],
+    function($, indexPage, interfacePage){
         $(function(){
             indexPage();
+            interfacePage();
         });
 });

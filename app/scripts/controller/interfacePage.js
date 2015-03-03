@@ -39,12 +39,65 @@ define(['jquery'], function($){
                 }
            };
 
+           // 播放量处理
+           var movieView = function( count ){
+                var MIN = 3e4, RANMIN = 5e5, RANMAX = 3e6,
+                ran = RANMIN + parseInt(Math.random() * ( RANMAX - RANMIN ));
+                if( count < MIN ){
+                    return ran;
+                }
+               return parseInt((count / 1e4) * 10) / 10 + '万' ;
+           };
+
+           // 影片类型
+           var movieType = function( type ){
+                    type = parseInt(type);
+                    return type;
+           };
+
+           // 影片集数
+           var film_location = function( location ){
+                    return String(location).slice(0, location.length - 2);
+           };
+
            //数据处理
            var dataDispose = function( data ){
                     var lists = [];
-               $.each(data, function(){
+               $.each(data, function(i, v){
+                    var obj = {
+                        movie_click: movieView(v.movie_click || 0),
+                        wid: v.wid,
+                        rcode: v.rcode,
+                        dt: v.dt
+                    };
+
+                   if(v.dt == "movie"){
+                       obj.title = v.title;
+                       obj.brief = v.brief;
+                       obj.hd_type = v.hd_type;
+                       obj.img_url = getImageUrl({movieid: v.movieid});
+                       obj.complete_status = v.complete_status;
+                       obj.area_catlog_typeid = v.area_catlog_typeid;
+                       obj.latest_location = v.latest_location;
+                       obj.mediatype = "&mediatype=album&mediaid=" + v.aid;
+                       obj.storm = "Storm://" + v.wid + "00000" + v.aid + "||aid=" + v.aid + "||movieid=" + v.movieid + "||channel=tips/online/index.html||pid=tips";
+                       obj.movieType = movieType(v.area_catlog_typeid);
+                       obj.location = film_location(v.latest_location);
+
+
+                   } else if(v.dt == "video"){
+                       obj.title = v.name;
+                       obj.brief = v.sub_title;
+                       obj.img_url = getImageUrl({img_url: v.img_url});
+                       obj.mediatype = "&mediatype=video&mediaid=" + v.vid;
+                       obj.storm = v.storm_short+"||aid="+v.aid+"||movieid=0||channel=tips/online/index.html||pid=tips||special=http://moviebox.baofeng.net/newbox1.0/newmicrovideo.html";
+                   }
+
+                   lists.push(obj);
 
                });
+
+               return lists;
            };
 
            (function(){
@@ -74,11 +127,15 @@ define(['jquery'], function($){
                    url: joinInterfaceUrl(),
                    type: 'get',
                    dataType: 'jsonp'
-               }).done(function(data){
-                   console.log(data);
+               }).done(function(res){
+                   var data;
+                   if($.isArray(res)){
+                       data = dataDispose([]);
+                   } else {
+                       data = dataDispose(res.data);
+                   }
+
                });
            }
-
-
        }
 });

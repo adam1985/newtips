@@ -1,0 +1,26 @@
+{{each lists as value index}}
+<div class="slider-item {{ index == 0 ? '' : 'active' }}">
+    <a class="jump" href="{{value.storm}}">
+        <img src="{{value.img_url}}" width="270" height="184" />
+        <div class="pointer dn abso player-hander">
+            <div class="player_btn"><img class="fixpng" src="images/player_min_btn.png" /> </div>
+            <div class="player_btn_on"><img class="fixpng" src="images/player_min_btn_on.png" /></div>
+        </div>
+        <div class="abso fixpng title-head">
+            <div class="title-bar">
+                <h3>
+                    <b>{{value.title}}</b>
+                    <em>更新至12集</em>
+                     <span class="cl icon-box">
+                        <span class="fl pointer sp add-list" data-type="add-list"></span>
+                        <span class="fr pointer sp add-favorite" data-type="add-favorite"></span>
+                    </span>
+                </h3>
+                <p class="des">{{value.brief}}</p>
+                <div class="fixpng video-view">{{value.movie_click}}</div>
+            </div>
+        </div>
+    </a>
+</div>
+
+{{/each}}

@@ -11,6 +11,14 @@ define(['jquery', 'component/jquery.slider'], function($){
                 $this.removeClass('title-active');
             });*/
 
+           $('.icon-box').find('span').hover(function(){
+               var $this = $(this);
+               $this.addClass($this.attr('data-type') + '-hover');
+           }, function(){
+               var $this = $(this);
+               $this.removeClass($this.attr('data-type') + '-hover');
+           });
+
            $('.player-hander').hover(function(){
                $(this).find('.player_btn_on').removeClass('dn');
                $(this).find('.player_btn').addClass('dn');
@@ -31,7 +39,7 @@ define(['jquery', 'component/jquery.slider'], function($){
 
            // 图片轮播
 
-           $('#tips-box').slider({
+          $('#tips-box').slider({
                wrap: sliderContainer,
                diyTag: '.slider-item',
                buttons: '#change-tips',

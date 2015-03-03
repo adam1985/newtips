@@ -18,10 +18,12 @@ module.exports = function (grunt) {
     // Define the configuration for all the tasks
     grunt.initConfig({
 
+        pkg: grunt.file.readJSON('package.json'),
+
         // Project settings
         yeoman: {
             // Configurable paths
-            app: 'app',
+            app: './app',
             dist: 'dist',
             tmp: '.tmp'
         },
@@ -29,6 +31,23 @@ module.exports = function (grunt) {
         clean: {
             dist: '<%= yeoman.dist %>',
             tmp: '<%= yeoman.tmp %>'
+        },
+
+        tmod: {
+            template: {
+                src: '<%= yeoman.app %>/tpl/*.html',
+                dest: '../scripts/tpl'
+            }
+        },
+
+        watch: {
+            template: {
+                files: '<%= tmod.template.src %>',
+                tasks: ['tmod'],
+                options: {
+                    spawn: false
+                }
+            }
         },
 
         // 压缩css任务
@@ -176,7 +195,6 @@ module.exports = function (grunt) {
                 assetsDirs: [
                     '<%= yeoman.dist %>',
                     '<%= yeoman.dist %>/images',
-                    '<%= yeoman.dist %>/img',
                     '<%= yeoman.dist %>/styles'
                 ]
             },

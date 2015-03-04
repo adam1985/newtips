@@ -35,8 +35,22 @@ module.exports = function (grunt) {
 
         tmod: {
             template: {
-                src: '<%= yeoman.app %>/tpl/*.html',
-                dest: '../scripts/tpl'
+                src: "<%= yeoman.app %>/tpl/*.html",
+                dest: '<%= yeoman.app %>/scripts/tpl/template.js',
+                options: {
+                    "output": '../',
+                    "base": '<%= yeoman.app %>',
+                    "charset": "utf-8",
+                    "syntax": "simple",
+                    "helpers": null,
+                    "escape": true,
+                    "compress": true,
+                    "type": "amd",
+                    "runtime": "template.js",
+                    "combo": true,
+                    "minify": true,
+                    "cache": false
+                }
             }
         },
 
@@ -52,6 +66,10 @@ module.exports = function (grunt) {
 
         // 压缩css任务
         cssmin: {
+            options: {
+                compatibility : 'ie7', //设置兼容模式
+                noAdvanced : true //取消高级特性
+            },
             css: {
                 files: {
                     '<%= yeoman.dist %>/styles/layout.css' : [
@@ -72,12 +90,6 @@ module.exports = function (grunt) {
                         cwd: '<%= yeoman.app %>/images/',
                         src: '{,*/}*.{gif,jpeg,jpg,png}',
                         dest: '<%= yeoman.dist %>/images/'
-                    },
-                    {
-                        expand: true,
-                        cwd: '<%= yeoman.app %>/img/',
-                        src: '{,*/}*.{gif,jpeg,jpg,png}',
-                        dest: '<%= yeoman.dist %>/img/'
                     }
                 ]
             }
@@ -86,14 +98,8 @@ module.exports = function (grunt) {
         htmlmin: {
             dist: {
                 options: {
-                    collapseBooleanAttributes: true,
-                    collapseWhitespace: true,
-                    removeAttributeQuotes: true,
-                    removeCommentsFromCDATA: true,
-                    removeEmptyAttributes: true,
-                    removeOptionalTags: true,
-                    removeRedundantAttributes: true,
-                    useShortDoctype: true
+                    removeComments: true,
+                    collapseWhitespace: true
                 },
                 files: [{
                     expand: true,
@@ -147,7 +153,7 @@ module.exports = function (grunt) {
                     cwd: '<%= yeoman.app %>',
                     dest: '<%= yeoman.dist %>',
                     src: [
-                        '{,*/}*.html'
+                        '*.html'
                     ]
                 }]
             },
@@ -155,12 +161,11 @@ module.exports = function (grunt) {
                 files: [{
                     expand: true,
                     cwd: '<%= yeoman.dist %>',
-                    dest: '<%= yeoman.tmp %>/assets',
+                    dest: '<%= yeoman.tmp %>',
                     src: [
-                        'images/*.*',
-                        'img/*.*',
-                        'styles/*.*',
-                        'scripts/*.*'
+                        'images/{,*/}*.{gif,jpeg,jpg,png,webp}',
+                        'styles/*.css',
+                        'scripts/*.js'
                     ]
                 }]
             }
@@ -195,11 +200,17 @@ module.exports = function (grunt) {
                 assetsDirs: [
                     '<%= yeoman.dist %>',
                     '<%= yeoman.dist %>/images',
-                    '<%= yeoman.dist %>/styles'
-                ]
+                    '<%= yeoman.dist %>/styles',
+                    '<%= yeoman.dist %>/scripts'
+                ],
+                patterns: {
+                    js: [[/(images\/[\w-]+\.png)/g, 'replace image in js']]
+                }
+
             },
             html: ['<%= yeoman.dist %>/{,*/}*.html'],
-            css: ['<%= yeoman.dist %>/styles/{,*/}*.css']
+            css: ['<%= yeoman.dist %>/styles/{,*/}*.css'],
+            js: ['<%= yeoman.dist %>/scripts/{,*/}*.js']
         }
 
     });

@@ -15,9 +15,11 @@ margin:auto; overflow: hidden;}
 .wrapper .jump{
     display: block;
     text-decoration: none;
+
 }
 
-.slider-item{ display: none;}
+.slider-item{ display: none; height: 184px;background: #ccc;
+    }
 .slider-container .active{
     display: block;}
 

@@ -11,7 +11,7 @@
         "helpers": null,
         "escape": true,
         "compress": true,
-        "type": "amd",
+        "type": "cmd",
         "runtime": "template.js",
         "alias": null,
         "minify": true,

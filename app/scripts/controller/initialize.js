@@ -1,7 +1,8 @@
 define(['jquery', './indexPage',  './interfacePage'],
     function($, indexPage, interfacePage){
         $(function(){
-            indexPage();
-            interfacePage();
+            interfacePage(function(isSuccess, data){
+                indexPage(isSuccess, data);
+            });
         });
 });

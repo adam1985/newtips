@@ -1,11 +1,18 @@
-define(['jquery'], function($){
-       return function() {
+define(['jquery',  'component/imgReady', 'component/utility', 'tpl/index'], function($,imgReady, utility,  indextpl){
+       return function(cb) {
            var external = window.external;
             var uid = "%7B41180A60-822D-F797-24D4-EEDB65ED16FC%7D" , userid, gid = 3,
                 isSuccess = false,
                 clientSucess = false,
                 REQUESTCOUNT = 2,
+                TIMEOUT = 5000,
                 index = 0;
+
+           var createPromise = function( fn ){
+               var dtd = $.Deferred();
+               fn( dtd );
+               return dtd.promise(fn);
+           };
 
            // 拼接地址
            var joinInterfaceUrl = function(){
@@ -33,7 +40,7 @@ define(['jquery'], function($){
                var baseUrl = 'http://box.bfimg.com';
                 if( config.movieid ){
                     var mod = config.movieid % 500;
-                    return baseUrl + '/tips/' + mod + '/' + config.movieid + '53_270*184.jpg';
+                    return baseUrl + '/tips/' + mod + '/' + config.movieid + '/53_270*184.jpg';
                 } else {
                     return baseUrl + config.img_url;
                 }
@@ -44,7 +51,7 @@ define(['jquery'], function($){
                 var MIN = 3e4, RANMIN = 5e5, RANMAX = 3e6,
                 ran = RANMIN + parseInt(Math.random() * ( RANMAX - RANMIN ));
                 if( count < MIN ){
-                    return ran;
+                    count =  ran;
                 }
                return parseInt((count / 1e4) * 10) / 10 + '万' ;
            };
@@ -65,6 +72,8 @@ define(['jquery'], function($){
                     var lists = [];
                $.each(data, function(i, v){
                     var obj = {
+                        loadfail: 'images/fail.png',
+                        img_status: 1,
                         movie_click: movieView(v.movie_click || 0),
                         wid: v.wid,
                         rcode: v.rcode,
@@ -100,15 +109,45 @@ define(['jquery'], function($){
                return lists;
            };
 
+           // 检测图片加载
+           var imageReadys = function( data , cb){
+               var promiseList = [];
+               $.each(data, function(i, v){
+                   promiseList.push(createPromise(function( dtd ){
+                       var index = 1, len = 3,img_url = v.img_url;
+                       (function(){
+                           var arg = arguments;
+                           if( index < len ){
+                               imgReady(img_url, function(){
+                                   data[i].img_status = index;
+                                   dtd.resolve();
+                               }, $.noop, function(){
+                                   img_url = location.href + v.loadfail;
+                                   index++;
+                                   arg.callee();
+                               });
+                           } else {
+                               data[i].img_status = index;
+                               dtd.resolve();
+                           }
+                       }());
+
+                   }));
+               });
+
+               $.when.apply($.Deferred, promiseList).done(function(){
+                   cb && cb(data);
+               });
+           };
+
            (function(){
                if( index < REQUESTCOUNT ){
                    if( external ){
-                       try{
+                       utility.tryCatch(function(){
                            uid = external.getuid();
-                           userid = window.external.getuserid();
-                           gid = window.external.getgid();
-                       }catch(e){}
-
+                           userid = external.getuserid();
+                           gid = external.getgid();
+                       });
                    }
 
                    if( !uid || !gid ){
@@ -124,17 +163,29 @@ define(['jquery'], function($){
 
            if( clientSucess ){
                $.ajax({
-                   url: joinInterfaceUrl(),
+                   url: "http://test.com/8.js",
                    type: 'get',
-                   dataType: 'jsonp'
+                   jsonpCallback: 'jquerycall',
+                   dataType: 'jsonp',
+                   timeout: TIMEOUT
                }).done(function(res){
                    var data;
                    if($.isArray(res)){
                        data = dataDispose([]);
                    } else {
+
                        data = dataDispose(res.data);
                    }
 
+                   imageReadys(data, function(data){
+                       $('#tips-box').html(indextpl({lists: data}));
+                       isSuccess = true;
+                       cb(isSuccess, data);
+                   });
+
+               }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
+                   console.log(textStatus);
+                   cb(isSuccess);
                });
            }
        }

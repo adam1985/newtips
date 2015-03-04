@@ -1,26 +1,44 @@
-{{each lists as value index}}
-<div class="slider-item {{ index == 0 ? '' : 'active' }}">
-    <a class="jump" href="{{value.storm}}">
-        <img src="{{value.img_url}}" width="270" height="184" />
-        <div class="pointer dn abso player-hander">
-            <div class="player_btn"><img class="fixpng" src="images/player_min_btn.png" /> </div>
-            <div class="player_btn_on"><img class="fixpng" src="images/player_min_btn_on.png" /></div>
+<div class="slider-container" id="slider-container">
+    {{each lists as value index}}
+        <div class="slider-item {{ index > 0 ? '' : 'active' }}">
+            <a class="jump" href="{{value.storm}}">
+                {{if value.img_status == 1 }}
+                <img src="{{value.img_url}}" width="270" height="184" />
+                {{else if value.img_status == 2 }}
+                <img src="{{value.loadfail}}" width="270" height="184" />
+                {{/if}}
+                <div class="pointer dn abso player-hander">
+                    <div class="player_btn"><img class="fixpng" src="images/player_min_btn.png" /> </div>
+                    <div class="player_btn_on"><img class="fixpng" src="images/player_min_btn_on.png" /></div>
+                </div>
+                <div class="abso fixpng title-head">
+                    <div class="title-bar">
+                        <h3>
+                            <b>{{value.title}}</b>
+                            {{if value.movieType == 2 }}
+                                {{if value.complete_status == 1 }}
+                                    <em>热播至{{value.location}}集</em>
+                                {{else if value.complete_status == 2 }}
+                                    <em>{{value.location}}集全</em>
+                                {{/if}}
+                            {{/if}}
+                             <span class="cl icon-box">
+                                <span class="fl pointer sp add-list" data-storm="{{value.storm}}" data-type="add-list"></span>
+                                <span class="fr pointer sp add-favorite" data-storm="{{value.storm}}" data-type="add-favorite"></span>
+                            </span>
+                        </h3>
+                        <p class="des">{{value.brief}}</p>
+                        <div class="fixpng video-view">{{value.movie_click}}</div>
+                    </div>
+                </div>
+            </a>
         </div>
-        <div class="abso fixpng title-head">
-            <div class="title-bar">
-                <h3>
-                    <b>{{value.title}}</b>
-                    <em>更新至12集</em>
-                     <span class="cl icon-box">
-                        <span class="fl pointer sp add-list" data-type="add-list"></span>
-                        <span class="fr pointer sp add-favorite" data-type="add-favorite"></span>
-                    </span>
-                </h3>
-                <p class="des">{{value.brief}}</p>
-                <div class="fixpng video-view">{{value.movie_click}}</div>
-            </div>
-        </div>
-    </a>
+    {{/each}}
 </div>
-
-{{/each}}
+<div class="cl abso change-tips" id="change-tips">
+    <ul class="fr">
+        {{each lists as value index}}
+            <li class="{{ index > 0 ? '' : 'active' }}"><a href="{{value.storm}}">{{index}}</a></li>
+        {{/each}}
+    </ul>
+</div>

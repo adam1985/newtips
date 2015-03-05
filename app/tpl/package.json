@@ -14,7 +14,7 @@
         "type": "cmd",
         "runtime": "template.js",
         "alias": null,
-        "minify": true,
+        "minify": false,
         "cache": false
     }
 }

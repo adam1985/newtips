@@ -1,6 +1,6 @@
 <div class="slider-container" id="slider-container">
     {{each lists as value index}}
-        <div class="slider-item {{ index > 0 ? '' : 'active' }}">
+        <div data-index="{{index}}" class="slider-item {{ index > 0 ? '' : 'active' }}">
             <a class="jump" href="{{value.storm}}">
                 {{if value.img_status == 1 }}
                 <img src="{{value.img_url}}" width="270" height="184" />
@@ -28,17 +28,20 @@
                             </span>
                         </h3>
                         <p class="des">{{value.brief}}</p>
-                        <div class="fixpng video-view">{{value.movie_click}}</div>
+                        <div class="{{ index > 0 ? '' : 'fixpng' }} video-view">{{value.movie_click}}</div>
                     </div>
                 </div>
+
             </a>
         </div>
     {{/each}}
 </div>
 <div class="cl abso change-tips" id="change-tips">
     <ul class="fr">
-        {{each lists as value index}}
-            <li class="{{ index > 0 ? '' : 'active' }}"><a href="{{value.storm}}">{{index}}</a></li>
+        {{each lists}}
+            {{if lists.length > 1 }}
+            <li data-index="{{$index}}" class="{{ $index > 0 ? '' : 'active' }}"><a href="{{$value.storm}}">{{$index}}</a></li>
+            {{/if}}
         {{/each}}
     </ul>
 </div>

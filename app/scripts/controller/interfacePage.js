@@ -1,7 +1,7 @@
 define(['jquery',  'component/imgReady', 'component/utility', 'tpl/index'], function($,imgReady, utility,  indextpl){
        return function(cb) {
            var external = window.external;
-            var uid = "%7B41180A60-822D-F797-24D4-EEDB65ED16FC%7D" , userid, gid = 3,
+            var uid = "" , userid = "", gid = "",
                 isSuccess = false,
                 clientSucess = false,
                 REQUESTCOUNT = 2,
@@ -163,13 +163,13 @@ define(['jquery',  'component/imgReady', 'component/utility', 'tpl/index'], func
 
            if( clientSucess ){
                $.ajax({
-                   url: "http://test.com/8.js",
+                   url: joinInterfaceUrl(), // "http://test.com/8.js"
                    type: 'get',
-                   jsonpCallback: 'jquerycall',
+                   //jsonpCallback: 'jquerycall',
                    dataType: 'jsonp',
                    timeout: TIMEOUT
                }).done(function(res){
-                   var data;
+                   var data = [];
                    if($.isArray(res)){
                        data = dataDispose([]);
                    } else {
@@ -177,16 +177,26 @@ define(['jquery',  'component/imgReady', 'component/utility', 'tpl/index'], func
                        data = dataDispose(res.data);
                    }
 
-                   imageReadys(data, function(data){
-                       $('#tips-box').html(indextpl({lists: data}));
-                       isSuccess = true;
-                       cb(isSuccess, data);
-                   });
+                   if( data.length ){
+                       imageReadys(data, function(data){
+                           $('#tips-box').html(indextpl({lists: data}));
+                           isSuccess = true;
+                           cb(isSuccess, data, {
+                               uid: uid,
+                               userid: userid,
+                               gid: gid
+                           });
+                       });
+                   } else {
+                       isSuccess = false;
+                       cb(isSuccess);
+                   }
 
                }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
-                   console.log(textStatus);
                    cb(isSuccess);
                });
+           } else {
+               cb(isSuccess);
            }
        }
 });

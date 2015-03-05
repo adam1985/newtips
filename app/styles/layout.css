@@ -4,17 +4,21 @@
 .abso{ position: absolute;}
 .fl{float:left}.fr{float:right}.cl{zoom:1}.cl:after{content:"";display:block;height:0;clear:both;visibility:hidden}
 .pointer{cursor: pointer;}
+
 .slider-container *{
     cursor: pointer;}
+
 .wrapper{
     width: 270px;
     height: 184px;
     position: relative;
 margin:auto; overflow: hidden;}
-
+.slider-container{height: 100%;}
 .wrapper .jump{
     display: block;
     text-decoration: none;
+    position: relative;
+    height: 100%;
 
 }
 
@@ -41,7 +45,7 @@ top: 50%; left: 50%; margin: -34px 0 0 -24px; overflow: hidden;}
     height: 39px;left: 0; top: 0;background: url(../images/720.png) no-repeat left top;}
 
 .title-head{width:100%;left: 0; top:116px; height: 68px; background: url("../images/titlebar.png") no-repeat;}
-.title-bar{ width:258px; padding:6px;  color: #fff; font-size: 12px;
+.title-bar{ width:270px; padding:4px;  color: #fff; font-size: 12px;
     height: 52px;
 /*
     filter:alpha(opacity=100 finishopacity=50 style=1 startx=0,starty=0,finishx=0,finishy=150) progid:DXImageTransform.Microsoft.gradient(startcolorstr=red,endcolorstr=blue,gradientType=0);
@@ -52,15 +56,16 @@ top: 50%; left: 50%; margin: -34px 0 0 -24px; overflow: hidden;}
 
 }
 .title-bar h3{font-family: "微软雅黑"; line-height: 16px; *line-height: 18px;}
-.title-bar h3 b{font-size: 16px; }
-.title-bar h3 em{font-size: 12px;font-family: "宋体"; margin:0 3px; _margin:0; font-style: normal;}
-.title-bar .des{ color: #c0c0c0; margin-top: 3px; *margin:4px auto 0; font-size: 13px; }
+.title-bar h3 b{font-size: 16px; _font-size:15px;}
+.title-bar h3 em{font-size: 12px;font-family: "宋体"; margin:0 1px; _margin:0; font-style: normal;}
+.title-bar .des{ color: #c0c0c0; margin:6px auto 0; _margin-top:4px; font-size: 13px; }
 
 .title-active .title-bar h3, .title-active p.des{ color: #e8e909;}
-.video-view{ background: url(../images/play_count.png) no-repeat left center; padding-left: 15px;
-    margin-top: 3px; *margin-top: 2px;_margin-top: 0;}
-.icon-box{display: inline-block; width: 35px;  position: relative;top:3px; }
+.title-bar .video-view{ background: url(../images/play_count.png) no-repeat left center; padding-left: 15px;
+    margin-top: 3px; *margin-top: 3px;_margin-top: 2px;}
+
 .title-bar h3 b,.title-bar h3 em,.icon-box{ height: 18px; _height: 20px;}
+.icon-box{display: inline-block; width: 33px;  position: relative;top:4px; overflow: hidden; height: 20px; }
 .sp{ background: url(../images/s.png) no-repeat;_background: url(../images/s.png) no-repeat;}
 .icon-box span{display: block;width: 14px; height: 14px; margin-top: 4px; overflow: hidden; }
 .add-list{   background-position: 0 0;}

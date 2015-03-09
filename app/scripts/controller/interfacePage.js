@@ -163,9 +163,10 @@ define(['jquery',  'component/imgReady', 'component/utility', 'tpl/index'], func
 
            if( clientSucess ){
                $.ajax({
-                   url: joinInterfaceUrl(), // "http://test.com/8.js"
-                   type: 'get',
+                   url: joinInterfaceUrl(),
+                   //url:"http://test.com/8.js",
                    //jsonpCallback: 'jquerycall',
+                   type: 'get',
                    dataType: 'jsonp',
                    timeout: TIMEOUT
                }).done(function(res){

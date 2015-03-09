@@ -1,4 +1,4 @@
-/*TMODJS:{"version":42,"md5":"d74bc83ba5ffeb7df30797177b36353c"}*/
+/*TMODJS:{"version":43,"md5":"e184869691a1d9d84d3a5843ca2ffde6"}*/
 define(function(require) {
     return require("./template")("index", function($data) {
         "use strict";
@@ -9,7 +9,8 @@ define(function(require) {
             $out += $escape(index > 0 ? "" : "active"), $out += '"> <a class="jump" href="', 
             $out += $escape(value.storm), $out += '"> ', 1 == value.img_status ? ($out += ' <img src="', 
             $out += $escape(value.img_url), $out += '" width="270" height="184" /> ') : 2 == value.img_status && ($out += ' <img src="', 
-            $out += $escape(value.loadfail), $out += '" width="270" height="184" /> '), $out += ' <div class="pointer dn abso player-hander"> <div class="player_btn"><img class="fixpng" src="images/player_min_btn.png" /> </div> <div class="player_btn_on"><img class="fixpng" src="images/player_min_btn_on.png" /></div> </div> <div class="abso fixpng title-head"> <div class="title-bar"> <h3> <b>', 
+            $out += $escape(value.loadfail), $out += '" width="270" height="184" /> '), $out += ' <div class="pointer dn abso player-hander"> <div class="player_btn"><img class="fixpng" src="images/player_min_btn.png" /> </div> <div class="player_btn_on"><img class="fixpng" src="images/player_min_btn_on.png" /></div> </div> ', 
+            "720P" == value.hd_type && ($out += ' <div class="abso fixpng p720"></div> '), $out += ' <div class="abso fixpng title-head"> <div class="title-bar"> <h3> <b>', 
             $out += $escape(value.title), $out += "</b> ", 2 == value.movieType && ($out += " ", 
             1 == value.complete_status ? ($out += " <em>热播至", $out += $escape(value.location), 
             $out += "集</em> ") : 2 == value.complete_status && ($out += " <em>", $out += $escape(value.location), 

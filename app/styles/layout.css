@@ -22,8 +22,7 @@ margin:auto; overflow: hidden;}
 
 }
 
-.slider-item{ display: none; height: 184px;background: #ccc;
-    }
+.slider-item{ display: none; height: 184px;background: #ccc;}
 .slider-container .active{
     display: block;}
 
@@ -73,7 +72,7 @@ top: 50%; left: 50%; margin: -34px 0 0 -24px; overflow: hidden;}
 .add-favorite{   background-position: right 0;}
 .add-favorite-hover{background-position: right -14px;}
 
-.change-tips{bottom: 3px;right: 10px; }
+.change-tips{right: 10px;bottom: 3px; }
 
 .change-tips li{
     float: left;

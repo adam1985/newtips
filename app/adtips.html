@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=7" />
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+    <title>tip</title>
+    <style type="text/css">
+        *{padding: 0;margin: 0;}
+        .ad-tips{width: 270px; height: 184px;
+            position: absolute;}
+    </style>
+    <script>
+        var storm = "Storm://37100001974076||aid=342||movieid=0||channel=tips/online/index.html||pid=tips||special=http://moviebox.baofeng.net/newbox1.0/newmicrovideo.html";
+    </script>
+</head>
+<body>
+<div class="ad-tips" id="ad-tips">
+
+</div>
+<script>
+    (function(){
+        var adtips = document.getElementById('ad-tips'),
+            isStorm = storm.indexOf('Storm:/') > -1;
+
+        if( isStorm ){
+            adtips.style.zIndex = 9999;
+        }
+        adtips.onclick = function(){
+            if( isStorm ){
+                try{
+                    window.external.gotoplay(storm);
+                }catch(e){}
+            }
+        };
+
+    }());
+</script>
+</body>
+</html>

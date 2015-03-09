@@ -25,12 +25,14 @@ module.exports = function (grunt) {
             // Configurable paths
             app: './app',
             dist: 'dist',
+            distmp: '.distmp',
             tmp: '.tmp'
         },
 
         clean: {
             dist: '<%= yeoman.dist %>',
-            tmp: '<%= yeoman.tmp %>'
+            tmp: '<%= yeoman.tmp %>',
+            distmp: '<%= yeoman.distmp %>'
         },
 
         tmod: {
@@ -72,7 +74,7 @@ module.exports = function (grunt) {
             },
             css: {
                 files: {
-                    '<%= yeoman.dist %>/styles/layout.css' : [
+                    '<%= yeoman.tmp %>/styles/layout.css' : [
                         '<%= yeoman.app %>/styles/reset.css',
                         '<%= yeoman.app %>/styles/layout.css'
                     ]
@@ -89,7 +91,7 @@ module.exports = function (grunt) {
                         expand: true,
                         cwd: '<%= yeoman.app %>/images/',
                         src: '{,*/}*.{gif,jpeg,jpg,png}',
-                        dest: '<%= yeoman.dist %>/images/'
+                        dest: '<%= yeoman.tmp %>/images/'
                     }
                 ]
             }
@@ -104,7 +106,7 @@ module.exports = function (grunt) {
                 files: [{
                     expand: true,
                     cwd: '<%= yeoman.dist %>',
-                    src: '{,*/}*.html',
+                    src: ['{,*/}*.html', '!adtips.html'],
                     dest: '<%= yeoman.dist %>'
                 }]
             }
@@ -122,15 +124,15 @@ module.exports = function (grunt) {
                     "cssImportIgnore": null,
                     "optimizeCss": "standard",
                     "name": "index",
-                    "out": "<%= yeoman.dist %>/scripts/index.js"
+                    "out": "<%= yeoman.tmp %>/scripts/index.js"
                 }
             }
         },
 
         concat: {
             requirejs: {
-                src: ['<%= yeoman.app %>/scripts/require.min.js', '<%= yeoman.dist %>/scripts/index.js'],
-                dest: '<%= yeoman.dist %>/scripts/index.js'
+                src: ['<%= yeoman.app %>/scripts/require.min.js', '<%= yeoman.tmp %>/scripts/index.js'],
+                dest: '<%= yeoman.tmp %>/scripts/index.js'
             }
         },
 
@@ -160,8 +162,20 @@ module.exports = function (grunt) {
             tmp: {
                 files: [{
                     expand: true,
-                    cwd: '<%= yeoman.dist %>',
-                    dest: '<%= yeoman.tmp %>',
+                    cwd: '<%= yeoman.tmp %>',
+                    dest: '<%= yeoman.distmp %>',
+                    src: [
+                        'images/{,*/}*.{gif,jpeg,jpg,png,webp}',
+                        'styles/*.css',
+                        'scripts/*.js'
+                    ]
+                }]
+            },
+            distmp:{
+                files: [{
+                    expand: true,
+                    cwd: '<%= yeoman.distmp %>',
+                    dest: '<%= yeoman.dist %>',
                     src: [
                         'images/{,*/}*.{gif,jpeg,jpg,png,webp}',
                         'styles/*.css',
@@ -176,9 +190,9 @@ module.exports = function (grunt) {
             dist: {
                 files: {
                     src: [
-                        '<%= yeoman.dist %>/scripts/{,*/}*.js',
-                        '<%= yeoman.dist %>/styles/{,*/}*.css',
-                        '<%= yeoman.dist %>/images/{,*/}*.{gif,jpeg,jpg,png,webp}'
+                        '<%= yeoman.distmp %>/scripts/{,*/}*.js',
+                        '<%= yeoman.distmp %>/styles/{,*/}*.css',
+                        '<%= yeoman.distmp %>/images/{,*/}*.{gif,jpeg,jpg,png,webp}'
                     ]
                 }
             }
@@ -216,16 +230,21 @@ module.exports = function (grunt) {
     });
 
     grunt.registerTask('default', [
-        'clean',
+        'clean:tmp',
+        'clean:distmp',
         'useminPrepare',
         'cssmin',
         'requirejs',
         'concat',
         'imagemin',
-        'copy',
+        'copy:dist',
+        'copy:html',
+        'copy:tmp',
         'rev',
+        'copy:distmp',
         'usemin',
         'htmlmin',
-        'clean:tmp'
+        'clean:tmp',
+        'clean:distmp'
     ]);
 };

@@ -241,8 +241,8 @@ module.exports = function (grunt) {
         'copy:html',
         'copy:tmp',
         'rev',
-        'copy:distmp',
         'usemin',
+        'copy:distmp',
         'htmlmin',
         'clean:tmp',
         'clean:distmp'

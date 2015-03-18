@@ -5,7 +5,7 @@ define(['jquery',  'component/imgReady', 'component/utility', 'tpl/index'], func
                 isSuccess = false,
                 clientSucess = false,
                 REQUESTCOUNT = 2,
-                TIMEOUT = 60 * 1000,
+                TIMEOUT = 8 * 1000,
                 index = 0;
 
            var createPromise = function( fn ){

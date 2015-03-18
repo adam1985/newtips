@@ -105,7 +105,7 @@ module.exports = function (grunt) {
                 },
                 files: [{
                     expand: true,
-                    cwd: '<%= yeoman.dist %>',
+                    cwd: '<%= yeoman.distmp %>',
                     src: ['{,*/}*.html', '!adtips.html'],
                     dest: '<%= yeoman.dist %>'
                 }]
@@ -153,7 +153,7 @@ module.exports = function (grunt) {
                 files: [{
                     expand: true,
                     cwd: '<%= yeoman.app %>',
-                    dest: '<%= yeoman.dist %>',
+                    dest: '<%= yeoman.distmp %>',
                     src: [
                         '*.html'
                     ]
@@ -203,7 +203,7 @@ module.exports = function (grunt) {
         // additional tasks can operate on them
         useminPrepare: {
             options: {
-                dest: '<%= yeoman.dist %>'
+                dest: '<%= yeoman.distmp %>'
             },
             html: '<%= yeoman.app %>/{,*/}*.html'
         },
@@ -212,19 +212,19 @@ module.exports = function (grunt) {
         usemin: {
             options: {
                 assetsDirs: [
-                    '<%= yeoman.dist %>',
-                    '<%= yeoman.dist %>/images',
-                    '<%= yeoman.dist %>/styles',
-                    '<%= yeoman.dist %>/scripts'
+                    '<%= yeoman.distmp %>',
+                    '<%= yeoman.distmp %>/images',
+                    '<%= yeoman.distmp %>/styles',
+                    '<%= yeoman.distmp %>/scripts'
                 ],
                 patterns: {
                     js: [[/(images\/[\w-]+\.png)/g, 'replace image in js']]
                 }
 
             },
-            html: ['<%= yeoman.dist %>/{,*/}*.html'],
-            css: ['<%= yeoman.dist %>/styles/{,*/}*.css'],
-            js: ['<%= yeoman.dist %>/scripts/{,*/}*.js']
+            html: ['<%= yeoman.distmp %>/{,*/}*.html'],
+            css: ['<%= yeoman.distmp %>/styles/{,*/}*.css'],
+            js: ['<%= yeoman.distmp %>/scripts/{,*/}*.js']
         }
 
     });

@@ -109,6 +109,36 @@ define(['jquery',  'component/imgReady', 'component/utility', 'tpl/index'], func
                return lists;
            };
 
+
+           // 处理标题是否换行
+           var linefeed = function( data ){
+               var MAX = 16, ICONLEN = 2;
+               $.each(data, function(i, v){
+                   var titlelen = v.title.length,
+                       location = 0,
+                       isblock = false,
+                       totallen = 0;
+                   if(v.movieType == 2){
+                       if(v.complete_status == 1){
+                           location = 5;
+                       } else if(v.complete_status == 2){
+                           location = 3;
+                       }
+                   }
+
+                   totallen += titlelen + ICONLEN + location;
+
+                   if(totallen>MAX){
+                       isblock = true;
+                   }
+
+                   data[i].isblock = isblock;
+               });
+
+               return data;
+
+           };
+
            // 检测图片加载
            var imageReadys = function( data , cb){
                var promiseList = [];
@@ -178,8 +208,11 @@ define(['jquery',  'component/imgReady', 'component/utility', 'tpl/index'], func
                        data = dataDispose(res.data);
                    }
 
+                   data = linefeed(data);
+
                    if( data.length ){
                        imageReadys(data, function(data){
+
                            $('#tips-box').html(indextpl({lists: data}));
                            isSuccess = true;
                            cb(isSuccess, data, {

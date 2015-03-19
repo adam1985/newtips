@@ -17,7 +17,7 @@
                 <div class="abso fixpng title-head">
                     <div class="title-bar">
                         <h3>
-                            <b>{{value.title}}</b>
+                            <b class="{{ value.isblock ? 'block' : '' }}">{{value.title}}</b>
                             {{if value.movieType == 2 }}
                                 {{if value.complete_status == 1 }}
                                     <em>热播至{{value.location}}集</em>
@@ -31,7 +31,9 @@
                             </span>
                         </h3>
                         <p class="des">{{value.brief}}</p>
-                        <div class="{{ index > 0 ? '' : 'fixpng' }} video-view">{{value.movie_click}}</div>
+                        {{if !value.isblock }}
+                            <div class="{{ index > 0 ? '' : 'fixpng' }} video-view">{{value.movie_click}}</div>
+                        {{/if}}
                     </div>
                 </div>
 

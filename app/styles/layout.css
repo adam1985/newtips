@@ -44,7 +44,7 @@ top: 50%; left: 50%; margin: -34px 0 0 -24px; overflow: hidden;}
     height: 39px;left: 0; top: 0;background: url(../images/720.png) no-repeat left top;}
 
 .title-head{width:100%;left: 0; top:116px; height: 68px; background: url("../images/titlebar.png") no-repeat;}
-.title-bar{ width:270px; padding:4px;  color: #fff; font-size: 12px;
+.title-bar{ width:270px; padding:0 4px;  color: #fff; font-size: 12px;
     height: 52px;
 /*
     filter:alpha(opacity=100 finishopacity=50 style=1 startx=0,starty=0,finishx=0,finishy=150) progid:DXImageTransform.Microsoft.gradient(startcolorstr=red,endcolorstr=blue,gradientType=0);
@@ -54,8 +54,9 @@ top: 50%; left: 50%; margin: -34px 0 0 -24px; overflow: hidden;}
     background:-webkit-gradient(linear, 0 0, 0 bottom, from(rgba(0, 0, 0, 0)), to(rgba(0, 0, 0, 0.6)));*/
 
 }
-.title-bar h3{font-family: "微软雅黑"; line-height: 16px; *line-height: 18px;}
+.title-bar h3{font-family: "微软雅黑";}
 .title-bar h3 b{font-size: 16px; _font-size:15px;}
+.title-bar h3 b.block{display: block;}
 .title-bar h3 em{font-size: 12px;font-family: "宋体"; margin:0 1px; _margin:0; font-style: normal;}
 .title-bar .des{ color: #c0c0c0; margin:6px auto 0; _margin-top:4px; font-size: 13px; }
 

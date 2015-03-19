@@ -57,7 +57,7 @@ define(['jquery', 'component/utility', 'component/jquery.slider'], function($, u
                    type: 'fade',
                    width: 270,
                    timer: 5000,
-                   speed: 'slow',
+                   speed: 'fast',
                    effect: 'easeInCubic',
                    eventType: 'mouseover',
                    className: 'active',

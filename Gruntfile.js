@@ -179,7 +179,8 @@ module.exports = function (grunt) {
                     src: [
                         'images/{,*/}*.{gif,jpeg,jpg,png,webp}',
                         'styles/*.css',
-                        'scripts/*.js'
+                        'scripts/*.js',
+                        'adtips.html'
                     ]
                 }]
             }

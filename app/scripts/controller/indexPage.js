@@ -51,7 +51,11 @@ define(['jquery', 'component/utility', 'component/jquery.slider'], function($, u
                    buttonTag: 'li',
                    eachMove: function(slider){
                        if( window.DD_belatedPNG){
-                           DD_belatedPNG.fixPng( slider.find('.video-view')[0] );
+                        var vv = slider.find('.video-view');
+                          if(vv.length){
+                            DD_belatedPNG.fixPng( vv[0] );
+                          }
+                           
                        }
                    },
                    type: 'fade',
@@ -93,7 +97,7 @@ define(['jquery', 'component/utility', 'component/jquery.slider'], function($, u
                        sort: '',
                        isad: 0,
                        userid: client.userid,
-                       groupid: client.groupid,
+                       groupid: client.gid,
                        path: '',
                        type: type,
                        uid: client.uid,
@@ -162,14 +166,12 @@ define(['jquery', 'component/utility', 'component/jquery.slider'], function($, u
                    });
                });
 
-               //alert('loadcomplete');
                // 通知客户端页面加载成功
                utility.tryCatch(function(){
                    window.external.loadcomplete();
                });
 
            }else{
-               //alert('loadfail');
                // 通知客户端清风接口加载失败
                utility.tryCatch(function(){
                    window.external.loadfail(1);

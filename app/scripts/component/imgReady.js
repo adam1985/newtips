@@ -15,7 +15,7 @@
 
 define(function(){
     return (function () {
-        var list = [], intervalId = null,
+        var list = [], intervalId = null, timeout = 8 * 1000, _timeout = null;
 
         // 用来执行队列
             tick = function () {
@@ -54,6 +54,11 @@ define(function(){
                 onready.end = true;
                 img = img.onload = img.onerror = null;
             };
+
+            _timeout = setTimeout(function(){
+                error && error.call(img);
+                onready.end = true;
+            }, timeout);
 
             // 图片尺寸就绪
             onready = function () {

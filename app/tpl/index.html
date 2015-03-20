@@ -18,16 +18,18 @@
                     <div class="title-bar">
                         <h3>
                             <b class="{{ value.isblock ? 'block' : '' }}">{{value.title}}</b>
-                            {{if value.movieType == 2 }}
-                                {{if value.complete_status == 1 }}
-                                    <em>热播至{{value.location}}集</em>
-                                {{else if value.complete_status == 2 }}
-                                    <em>{{value.location}}集全</em>
+                            <span class="{{ value.isblock ? 'block' : '' }}">
+                                {{if value.movieType == 2 }}
+                                    {{if value.complete_status == 1 }}
+                                        <em>热播至{{value.location}}集</em>
+                                    {{else if value.complete_status == 2 }}
+                                        <em>{{value.location}}集全</em>
+                                    {{/if}}
                                 {{/if}}
-                            {{/if}}
-                             <span class="cl icon-box">
-                                <span class="fl pointer sp add-list" data-storm="{{value.storm}}" data-type="add-list"></span>
-                                <span class="fr pointer sp add-favorite" data-storm="{{value.storm}}" data-type="add-favorite"></span>
+                                 <span class="cl icon-box">
+                                    <span class="fl pointer sp add-list" data-storm="{{value.storm}}" data-type="add-list"></span>
+                                    <span class="fr pointer sp add-favorite" data-storm="{{value.storm}}" data-type="add-favorite"></span>
+                                </span>
                             </span>
                         </h3>
                         <p class="des">{{value.brief}}</p>

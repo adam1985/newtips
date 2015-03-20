@@ -139,6 +139,21 @@ define(['jquery',  'component/imgReady', 'component/utility', 'tpl/index'], func
 
            };
 
+           var getBasepath = function( url ){
+                var rex =  /\w+?\.html$/;
+                if(rex.test(url)){
+                  url = url.replace(rex, '');
+                }
+
+                if(/[^/]$/.test(url)){
+                  url += '/';
+                }
+                
+                return url;
+
+
+           };
+
            // 检测图片加载
            var imageReadys = function( data , cb){
                var promiseList = [];
@@ -152,7 +167,7 @@ define(['jquery',  'component/imgReady', 'component/utility', 'tpl/index'], func
                                    data[i].img_status = index;
                                    dtd.resolve();
                                }, $.noop, function(){
-                                   img_url = location.href + v.loadfail;
+                                   img_url = getBasepath(location.href) + v.loadfail;
                                    index++;
                                    arg.callee();
                                });

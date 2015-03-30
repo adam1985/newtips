@@ -76,12 +76,14 @@ define(['jquery',  'component/imgReady', 'component/utility', 'tpl/index'], func
                         img_status: 1,
                         movie_click: movieView(v.movie_click || 0),
                         wid: v.wid,
+                        aid: v.aid,
                         rcode: v.rcode,
                         dt: v.dt
                     };
 
                    if(v.dt == "movie"){
                        obj.title = v.title;
+                       obj.movieid = v.movieid;
                        obj.brief = v.brief;
                        obj.hd_type = v.hd_type;
                        obj.img_url = getImageUrl({movieid: v.movieid});

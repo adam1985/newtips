@@ -119,7 +119,7 @@ define(['jquery', 'component/utility', 'component/jquery.slider'], function($, u
 
                    utility.tryCatch(function(){
                        window.external.gotoplay(storm);
-                       tipsReport(film.title, film.movieid, film.wid, 'play');
+                       tipsReport(film.title, film.aid, film.wid, 'play');
                    });
                };
 
@@ -147,10 +147,9 @@ define(['jquery', 'component/utility', 'component/jquery.slider'], function($, u
                    var $this = $(this), storm = $this.attr('data-storm'),
                        index = getIndex($this),
                        film = data[index];
-
                    utility.tryCatch(function(){
                        window.external.addtolist(storm);
-                       tipsReport(film.title, film.movieid, film.wid, 'add');
+                       tipsReport(film.title, film.aid, film.wid, 'add');
                    });
                });
 
@@ -162,12 +161,13 @@ define(['jquery', 'component/utility', 'component/jquery.slider'], function($, u
 
                    utility.tryCatch(function(){
                        window.external.favorite(storm);
-                       tipsReport(film.title, film.movieid, film.wid, 'shoucang');
+                       tipsReport(film.title, film.aid, film.wid, 'shoucang');
                    });
                });
 
                // 通知客户端页面加载成功
                utility.tryCatch(function(){
+                   alert('loadcomplete');
                    window.external.loadcomplete();
                });
 

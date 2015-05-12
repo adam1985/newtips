@@ -167,7 +167,7 @@ define(['jquery', 'component/utility', 'component/jquery.slider'], function($, u
 
                // 通知客户端页面加载成功
                utility.tryCatch(function(){
-                   alert('loadcomplete');
+                   //alert('loadcomplete');
                    window.external.loadcomplete();
                });
 

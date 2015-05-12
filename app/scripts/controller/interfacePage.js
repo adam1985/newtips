@@ -72,7 +72,7 @@ define(['jquery',  'component/imgReady', 'component/utility', 'tpl/index'], func
                     var lists = [];
                $.each(data, function(i, v){
                     var obj = {
-                        loadfail: 'images/fail.png',
+                        loadfail: getBasepath(location.href) + 'images/fail.png',
                         img_status: 1,
                         movie_click: movieView(v.movie_click || 0),
                         wid: v.wid,
@@ -165,11 +165,11 @@ define(['jquery',  'component/imgReady', 'component/utility', 'tpl/index'], func
                        (function(){
                            var arg = arguments;
                            if( index < len ){
-                               imgReady(img_url, function(){
+                               imgReady(img_url, $.noop, function(){
                                    data[i].img_status = index;
                                    dtd.resolve();
-                               }, $.noop, function(){
-                                   img_url = getBasepath(location.href) + v.loadfail;
+                               }, function(){
+                                   img_url = v.loadfail;
                                    index++;
                                    arg.callee();
                                });
@@ -211,7 +211,7 @@ define(['jquery',  'component/imgReady', 'component/utility', 'tpl/index'], func
            if( clientSucess ){
                $.ajax({
                    url: joinInterfaceUrl(),
-                   //url:"http://test.com/8.js",
+                   //url:"http://test.com/8.php",
                    //jsonpCallback: 'jquerycall',
                    type: 'get',
                    dataType: 'jsonp',
@@ -229,7 +229,6 @@ define(['jquery',  'component/imgReady', 'component/utility', 'tpl/index'], func
 
                    if( data.length ){
                        imageReadys(data, function(data){
-
                            $('#tips-box').html(indextpl({lists: data}));
                            isSuccess = true;
                            cb(isSuccess, data, {

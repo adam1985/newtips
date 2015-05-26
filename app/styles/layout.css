@@ -62,7 +62,7 @@ top: 50%; left: 50%; margin: -34px 0 0 -24px; overflow: hidden;}
 
 .title-active .title-bar h3, .title-active p.des{ color: #e8e909;}
 .title-bar .video-view{ background: url(../images/play_count.png) no-repeat left center; padding-left: 15px;
-    margin-top: 3px; *margin-top: 3px;_margin-top: 2px;}
+    margin-top: 3px; *margin-top: 3px;_margin-top: 2px; color: #c0c0c0;}
 
 .title-bar h3 b,.title-bar h3 em,.icon-box{ height: 18px; _height: 20px;}
 .icon-box{display: inline-block; width: 33px;  position: relative;top:4px; overflow: hidden; height: 20px; }

@@ -42,7 +42,8 @@ define(['jquery',  'component/imgReady', 'component/utility', 'tpl/index'], func
                     var mod = config.movieid % 500;
                     return baseUrl + '/tips/' + mod + '/' + config.movieid + '/53_270*184.jpg';
                 } else {
-                    return baseUrl + config.img_url;
+                    var rex = /\d{2,3}\*\d{2,3}\.jpg$/;
+                    return baseUrl + config.img_url.replace(rex, "270*184.jpg");
                 }
            };
 

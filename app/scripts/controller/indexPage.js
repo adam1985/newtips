@@ -6,11 +6,11 @@ define(['jquery', 'component/utility', 'component/jquery.slider'], function($, u
                    titleHead = $('.title-head'),
                    changeTips = $('#change-tips');
                /*titleHead.hover(function(){
-                var $this = $(this);
+                    var $this = $(this);
                 $this.addClass('title-active');
                 }, function(){
                 var $this = $(this);
-                $this.removeClass('title-active');
+                    $this.removeClass('title-active');
                 });*/
 
                if( window.DD_belatedPNG ){
@@ -129,7 +129,7 @@ define(['jquery', 'component/utility', 'component/jquery.slider'], function($, u
                    var target = $(e.target),
                        index = getIndex(target);
                    if(target.closest('.icon-box').length == 0){
-                       gotoplay(this.href, index);
+                       gotoplay($(this).attr('data-href'), index);
                    }
                    return false;
                });

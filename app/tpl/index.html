@@ -1,7 +1,7 @@
 <div class="slider-container" id="slider-container">
     {{each lists as value index}}
         <div data-index="{{index}}" class="slider-item {{ index > 0 ? '' : 'active' }}">
-            <a class="jump" href="{{value.storm}}">
+            <a class="jump" data-href="{{value.storm}}" href="javascript:void(null)" onclick="return false;">
                 {{if value.img_status == 1 }}
                 <img src="{{value.img_url}}" width="270" height="184" />
                 {{else if value.img_status == 2 }}

@@ -1,4 +1,4 @@
-/*TMODJS:{"version":51,"md5":"33febb18516fe58163aa7125b1a9afcf"}*/
+/*TMODJS:{"version":52,"md5":"28e6addd8aeb4907d07593e7576f915f"}*/
 define(function(require) {
     return require("./template")("index", function($data) {
         "use strict";
@@ -6,9 +6,10 @@ define(function(require) {
         $data.index, $utils.$escape), $out = ($data.$value, $data.$index, "");
         return $out += '<div class="slider-container" id="slider-container"> ', $each(lists, function(value, index) {
             $out += ' <div data-index="', $out += $escape(index), $out += '" class="slider-item ', 
-            $out += $escape(index > 0 ? "" : "active"), $out += '"> <a class="jump" href="', 
-            $out += $escape(value.storm), $out += '"> ', 1 == value.img_status ? ($out += ' <img src="', 
-            $out += $escape(value.img_url), $out += '" width="270" height="184" /> ') : 2 == value.img_status && ($out += ' <img src="', 
+            $out += $escape(index > 0 ? "" : "active"), $out += '"> <a class="jump" data-href="', 
+            $out += $escape(value.storm), $out += '" href="javascript:void(null)" onclick="return false;"> ', 
+            1 == value.img_status ? ($out += ' <img src="', $out += $escape(value.img_url), 
+            $out += '" width="270" height="184" /> ') : 2 == value.img_status && ($out += ' <img src="', 
             $out += $escape(value.loadfail), $out += '" width="270" height="184" /> '), $out += ' <div class="pointer dn abso player-hander"> <div class="player_btn"><img class="fixpng" src="images/player_min_btn.png" /> </div> <div class="player_btn_on"><img class="fixpng" src="images/player_min_btn_on.png" /></div> </div> ', 
             "720P" == value.hd_type && ($out += ' <div class="abso fixpng p720"></div> '), $out += ' <div class="abso fixpng title-head"> <div class="title-bar"> <h3> <b class="', 
             $out += $escape(value.isblock ? "block" : ""), $out += '">', $out += $escape(value.title), 

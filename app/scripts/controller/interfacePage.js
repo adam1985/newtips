@@ -3,7 +3,7 @@ define(['jquery',  'component/imgReady', 'component/utility', 'tpl/index'], func
            var external = window.external;
             var uid = "" , userid = "", gid = "",
                 isSuccess = false,
-                clientSucess = false,
+                clientSucess = true,
                 REQUESTCOUNT = 2,
                 TIMEOUT = 8 * 1000,
                 index = 0;
@@ -42,8 +42,7 @@ define(['jquery',  'component/imgReady', 'component/utility', 'tpl/index'], func
                     var mod = config.movieid % 500;
                     return baseUrl + '/tips/' + mod + '/' + config.movieid + '/53_270*184.jpg';
                 } else {
-                    var rex = /\d{2,3}\*\d{2,3}\.jpg$/;
-                    return baseUrl + config.img_url.replace(rex, "270*184.jpg");
+                    return baseUrl + config.img_url;
                 }
            };
 
@@ -211,9 +210,9 @@ define(['jquery',  'component/imgReady', 'component/utility', 'tpl/index'], func
 
            if( clientSucess ){
                $.ajax({
-                   url: joinInterfaceUrl(),
-                   //url:"http://test.com/8.php",
-                   //jsonpCallback: 'jquerycall',
+                   //url: joinInterfaceUrl(),
+                   url:"http://newtips.com/8.php",
+                   jsonpCallback: 'jquerycall',
                    type: 'get',
                    dataType: 'jsonp',
                    timeout: TIMEOUT
